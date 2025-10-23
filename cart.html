@@ -129,22 +129,6 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
     nav.classList.toggle('scrolled', window.scrollY > 50);
   });
 
-  // Sample 7 items
-  const sampleItems = [
-    { name:"Classic Denim Jacket", price:89.99, image:"images/denim.jpeg" },
-    { name:"Cotton Casual Shirt", price:59.99, image:"images/shirt.jpeg" },
-    { name:"Slim Fit Trousers", price:69.99, image:"images/celana.jpeg" },
-    { name:"Leather Bomber Jacket", price:129.99, image:"images/bomber.jpeg" },
-    { name:"Hoodie Casual", price:49.99, image:"images/hoodie.jpeg" },
-    { name:"Summer Linen Shirt", price:64.99, image:"images/linen.jpeg" },
-    { name:"Chino Slim Fit Pants", price:74.99, image:"images/chino.jpeg" }
-  ];
-
-  // Save sample items to localStorage if empty
-  if(!localStorage.getItem('cart')){
-    localStorage.setItem('cart', JSON.stringify(sampleItems.map(i => ({...i, quantity:1}))));
-  }
-
   // Render cart
   function renderCart(){
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -194,25 +178,24 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
 
   window.addEventListener('load', renderCart);
 
-  // Checkout with centered success alert
+  // Checkout
   const checkoutBtn = document.getElementById('checkoutBtn');
   const alertBox = document.getElementById('checkoutAlert');
 
   checkoutBtn.addEventListener('click', ()=>{
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     if(cart.length > 0){
-      // Show alert
+      // Show success alert
       alertBox.style.display = 'block';
       setTimeout(()=> alertBox.classList.add('show'), 10);
 
-      // Hide after 3s
       setTimeout(()=>{
         alertBox.classList.remove('show');
         setTimeout(()=> alertBox.style.display = 'none', 400);
       }, 3000);
 
       // Reset cart
-      localStorage.removeItem('cart');
+      localStorage.removeItem('cart'); // cart jadi 0
       renderCart();
     }
   });
