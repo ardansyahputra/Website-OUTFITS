@@ -1,181 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OUTFITS | Product Details</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUTFITS | Product Details</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/logo.jpeg" style="border-radius:50%;">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="images/logo.jpeg" style="border-radius:50%;">
 
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<!-- Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Poppins', sans-serif; background-color: #fdfaf6; color: #333; }
+<style>
+/* General Body */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fdfaf6;
+  color: #333;
+  margin:0; padding:0;
+  scroll-behavior: smooth;
+}
 
-    /* Navbar */
-    .navbar { background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s ease; }
-    .navbar.scrolled { background-color: #f8f9fa; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
-    .navbar-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.5rem; color: #000; }
-    .nav-link { font-weight: 500; margin: 0 8px; transition: color 0.3s ease; }
-    .nav-link:hover, .nav-link.active { color: #663d0082; }
-    .profile-pic { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid #ddd; cursor: pointer; }
+/* Navbar */
+.navbar {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+.navbar.scrolled { background-color: #f8f9fa; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+.navbar-brand { display:flex; align-items:center; gap:10px; font-weight:600; font-size:1.5rem; }
+.nav-link { font-weight:500; margin:0 8px; transition:0.3s; }
+.nav-link:hover, .nav-link.active { color: #663d0082; }
+.profile-pic { width:42px; height:42px; border-radius:50%; border:2px solid #ddd; object-fit:cover; }
 
-    /* Product Section */
-    .product-section { padding-top: 120px; padding-bottom: 80px; }
-    .product-img { width: 100%; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .product-title { font-weight: 600; color: #000; margin-bottom: 20px; }
-    .product-price { font-size: 1.5rem; color: #663d00; margin-bottom: 15px; }
+/* Product Section */
+.product-section {
+  padding:120px 0 60px 0;
+}
+.product-img {
+  width:100%;
+  border-radius:15px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+.product-title { font-weight:600; color:#000; margin-bottom:15px; }
+.product-price { font-size:1.5rem; color:#663d00; margin-bottom:10px; }
+.quantity-controls {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:15px;
+}
+.quantity-controls button {
+  background-color:#000;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  padding:6px 14px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.quantity-controls button:hover { background-color:#663d0082; transform:scale(1.05);}
+.quantity-controls span { min-width:30px; text-align:center; display:inline-block; font-weight:600; }
 
-    .quantity-controls { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
-    .quantity-controls button { background-color: #000; color: #fff; border: none; border-radius: 6px; padding: 5px 12px; cursor:pointer; transition: 0.3s; }
-    .quantity-controls button:hover { background-color: #663d0082; transform: scale(1.05); }
-    .quantity-controls span { min-width: 30px; text-align: center; display: inline-block; font-weight: 600; }
+/* Floating Cart Button */
+#floatingCart {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color:#000;
+  color:#fff;
+  border-radius:50px;
+  padding:12px 18px;
+  font-size:1.2rem;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  cursor:pointer;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  transition:0.3s;
+}
+#floatingCart:hover { background-color:#663d0082; transform:scale(1.08);}
+#floatingCart span { background-color:#dc8400; color:#fff; border-radius:50%; padding:2px 8px; font-size:0.9rem; }
 
-    footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 60px; color: #888; font-size: 0.9rem; }
-  </style>
+/* Responsive Adjustments */
+@media (max-width: 992px){
+  .product-section .row { flex-direction: column; text-align:center; }
+  .product-img { width:90%; margin:0 auto 20px; }
+  .quantity-controls { justify-content:center; }
+}
+@media (max-width: 768px){
+  .product-title { font-size:1.5rem; }
+  .product-price { font-size:1.25rem; }
+}
+@media (max-width: 576px){
+  .product-section { padding:80px 15px; }
+  .quantity-controls button { padding:8px 12px; }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="welcome.html">
-        <img src="images/logo.jpeg" width="45" height="45" alt="logo" style="border-radius:50%;">
-        OUTFITS
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav align-items-center">
-          <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#shop">Shop</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-          <li class="nav-item me-3"><a class="nav-link active" href="cart.html"><i class="bi bi-cart3 fs-5"></i></a></li>
-          <li class="nav-item">
-            <a href="profile.html">
-              <img id="navbarProfile" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic" width="42" height="42">
-              <script>
-                window.addEventListener("load", () => {
-                  const savedPhoto = localStorage.getItem("navbarProfile");
-                  if(savedPhoto){
-                    const navImg = document.getElementById("navbarProfile");
-                    if(navImg) navImg.src = savedPhoto;
-                  }
-                });
-              </script>
-            </a>
-          </li>
-        </ul>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+  <a class="navbar-brand fw-bold" href="index.html">
+    <img src="images/logo.jpeg" width="45" height="45" style="border-radius:50%;"> OUTFITS
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav align-items-center">
+      <li class="nav-item"><a class="nav-link" href="home.html#home">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="home.html#shop">Shop</a></li>
+      <li class="nav-item"><a class="nav-link" href="home.html#about">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+      <li class="nav-item">
+        <a href="profile.html">
+          <img id="navbarProfile" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic">
+          <script>
+            window.addEventListener("load", () => {
+              const savedPhoto = localStorage.getItem("navbarProfile");
+              if(savedPhoto) document.getElementById("navbarProfile").src = savedPhoto;
+            });
+          </script>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+<!-- Product List -->
+<div class="container">
+<script>
+const products = [
+  {id:'denim', name:'Classic Denim Jacket', price:89.99, image:'images/denim.jpeg', material:'100% Cotton Denim', size:'S, M, L, XL', color:'Blue', features:'Kancing depan, 2 kantong samping, nyaman'},
+  {id:'shirt', name:'Cotton Casual Shirt', price:59.99, image:'images/shirt.jpeg', material:'100% Premium Cotton', size:'S, M, L, XL, XXL', color:'White, Light Blue, Grey', features:'Breathable, Soft Texture, Button-down collar'},
+  {id:'trousers', name:'Slim Fit Trousers', price:69.99, image:'images/celana.jpeg', material:'98% Cotton, 2% Elastane', size:'30, 32, 34, 36', color:'Black, Navy, Khaki', features:'Slim fit, Stretchable, Stylish & modern'},
+  {id:'bomber', name:'Leather Bomber Jacket', price:129.99, image:'images/bombers.jpeg', material:'Genuine Leather', size:'M, L, XL', color:'Black, Brown', features:'Zip depan, kantong sisi, tahan angin, nyaman untuk musim dingin'},
+  {id:'hoodie', name:'Hoodie Casual', price:49.99, image:'images/hoodie.jpeg', material:'80% Cotton, 20% Polyester', size:'S, M, L, XL, XXL', color:'Grey, Navy, Black', features:'Hoodie adjustable, kangaroo pocket, nyaman & hangat'},
+  {id:'linen', name:'Summer Linen Shirt', price:64.99, image:'images/lenin.jpeg', material:'100% Linen', size:'S, M, L, XL', color:'White, Light Blue, Beige', features:'Breathable, ringan, cocok untuk cuaca panas'},
+];
+
+products.forEach(prod => {
+  const section = document.createElement('section');
+  section.id = prod.id;
+  section.className = 'product-section';
+  section.innerHTML = `
+  <div class="row align-items-center">
+    <div class="col-md-6 mb-4 mb-md-0">
+      <img src="${prod.image}" alt="${prod.name}" class="product-img">
+    </div>
+    <div class="col-md-6">
+      <h1 class="product-title">${prod.name}</h1>
+      <p class="product-price">$${prod.price.toFixed(2)}</p>
+      <p><strong>Material:</strong> ${prod.material}</p>
+      <p><strong>Ukuran:</strong> ${prod.size}</p>
+      <p><strong>Warna:</strong> ${prod.color}</p>
+      <p><strong>Fitur:</strong> ${prod.features}</p>
+      <div class="quantity-controls" data-name="${prod.name}" data-price="${prod.price}" data-image="${prod.image}">
+        <button class="minus">-</button>
+        <span class="qty">0</span>
+        <button class="plus">+</button>
       </div>
     </div>
-  </nav>
+  </div>
+  `;
+  document.body.appendChild(section);
+});
+</script>
+</div>
 
-  <!-- Products List -->
-  <div class="container">
-    <!-- Product Template -->
-    <script>
-      const products = [
-        {id:'denim', name:'Classic Denim Jacket', price:89.99, image:'images/denim.jpeg', material:'100% Cotton Denim', size:'S, M, L, XL', color:'Blue', features:'Kancing depan, 2 kantong samping, nyaman'},
-        {id:'shirt', name:'Cotton Casual Shirt', price:59.99, image:'images/shirt.jpeg', material:'100% Premium Cotton', size:'S, M, L, XL, XXL', color:'White, Light Blue, Grey', features:'Breathable, Soft Texture, Button-down collar'},
-        {id:'trousers', name:'Slim Fit Trousers', price:69.99, image:'images/celana.jpeg', material:'98% Cotton, 2% Elastane', size:'30, 32, 34, 36', color:'Black, Navy, Khaki', features:'Slim fit, Stretchable, Stylish & modern'},
-        {id:'bomber', name:'Leather Bomber Jacket', price:129.99, image:'images/bombers.jpeg', material:'Genuine Leather', size:'M, L, XL', color:'Black, Brown', features:'Zip depan, kantong sisi, tahan angin, nyaman untuk musim dingin'},
-        {id:'hoodie', name:'Hoodie Casual', price:49.99, image:'images/hoodie.jpeg', material:'80% Cotton, 20% Polyester', size:'S, M, L, XL, XXL', color:'Grey, Navy, Black', features:'Hoodie adjustable, kangaroo pocket, nyaman & hangat'},
-        {id:'linen', name:'Summer Linen Shirt', price:64.99, image:'images/lenin.jpeg', material:'100% Linen', size:'S, M, L, XL', color:'White, Light Blue, Beige', features:'Breathable, ringan, cocok untuk cuaca panas'},
-      ];
+<!-- Floating Cart -->
+<div id="floatingCart" onclick="window.location.href='cart.html'">
+  <i class="bi bi-cart3"></i> <span id="cartCount">0</span>
+</div>
 
-      const container = document.createElement('div');
-      container.classList.add('container');
 
-      products.forEach(prod => {
-        const section = document.createElement('section');
-        section.id = prod.id;
-        section.className = 'product-section';
-        section.innerHTML = `
-          <div class="row align-items-center">
-            <div class="col-md-6 mb-4 mb-md-0">
-              <img src="${prod.image}" alt="${prod.name}" class="product-img">
-            </div>
-            <div class="col-md-6">
-              <h1 class="product-title">${prod.name}</h1>
-              <p class="product-price">$${prod.price.toFixed(2)}</p>
-              <p><strong>Material:</strong> ${prod.material}</p>
-              <p><strong>Ukuran:</strong> ${prod.size}</p>
-              <p><strong>Warna:</strong> ${prod.color}</p>
-              <p><strong>Fitur:</strong> ${prod.features}</p>
-              <div class="quantity-controls" data-name="${prod.name}" data-price="${prod.price}" data-image="${prod.image}">
-                <button class="minus">-</button>
-                <span class="qty">0</span>
-                <button class="plus">+</button>
-              </div>
-            </div>
-          </div>
-        `;
-        container.appendChild(section);
-      });
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY>50);
+});
 
-      document.body.insertBefore(container, document.querySelector('footer'));
-    </script>
+// Quantity + / -
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.quantity-controls').forEach(control => {
+    const plusBtn = control.querySelector('.plus');
+    const minusBtn = control.querySelector('.minus');
+    const qtyDisplay = control.querySelector('.qty');
+    const name = control.dataset.name;
+    const price = parseFloat(control.dataset.price);
+    const image = control.dataset.image;
 
-  <!-- Footer -->
-  <footer>© 2025 OUTFITS. All Rights Reserved.</footer>
+    // Load existing cart
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existing = cart.find(item=>item.name===name);
+    if(existing) qtyDisplay.textContent = existing.quantity;
 
-  <!-- Bootstrap Script -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    window.addEventListener('scroll', () => {
-      const nav = document.querySelector('.navbar');
-      if(window.scrollY > 50) nav.classList.add('scrolled');
-      else nav.classList.remove('scrolled');
+    plusBtn.addEventListener('click', () => {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const idx = cart.findIndex(item=>item.name===name);
+      if(idx>=0) cart[idx].quantity +=1;
+      else cart.push({name, price, image, quantity:1});
+      localStorage.setItem('cart', JSON.stringify(cart));
+      qtyDisplay.textContent = cart.find(item=>item.name===name).quantity;
+      updateCartCount();
     });
 
-    // Quantity + / - functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.quantity-controls').forEach(control => {
-        const plusBtn = control.querySelector('.plus');
-        const minusBtn = control.querySelector('.minus');
-        const qtyDisplay = control.querySelector('.qty');
-        const name = control.dataset.name;
-        const price = parseFloat(control.dataset.price);
-        const image = control.dataset.image;
-
-        // Load quantity from localStorage if exists
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existing = cart.find(item => item.name === name);
-        if(existing) qtyDisplay.textContent = existing.quantity;
-
-        plusBtn.addEventListener('click', () => {
-          let cart = JSON.parse(localStorage.getItem('cart')) || [];
-          const index = cart.findIndex(item => item.name === name);
-          if(index >= 0) { cart[index].quantity +=1; }
-          else { cart.push({name, price, image, quantity:1}); }
-          localStorage.setItem('cart', JSON.stringify(cart));
-          qtyDisplay.textContent = cart.find(item => item.name === name).quantity;
-        });
-
-        minusBtn.addEventListener('click', () => {
-          let cart = JSON.parse(localStorage.getItem('cart')) || [];
-          const index = cart.findIndex(item => item.name === name);
-          if(index >= 0 && cart[index].quantity >0){
-            cart[index].quantity -=1;
-            if(cart[index].quantity ===0) cart.splice(index,1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-          }
-          qtyDisplay.textContent = cart.find(item => item.name === name)?.quantity || 0;
-        });
-      });
+    minusBtn.addEventListener('click', () => {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const idx = cart.findIndex(item=>item.name===name);
+      if(idx>=0 && cart[idx].quantity>0){
+        cart[idx].quantity -=1;
+        if(cart[idx].quantity===0) cart.splice(idx,1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+      qtyDisplay.textContent = cart.find(item=>item.name===name)?.quantity || 0;
+      updateCartCount();
     });
-  </script>
+  });
+});
+
+// Update floating cart count
+function updateCartCount(){
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const totalQty = cart.reduce((sum,item)=>sum+item.quantity,0);
+  document.getElementById('cartCount').textContent = totalQty;
+}
+
+window.addEventListener('load', updateCartCount);
+</script>
 </body>
 </html>

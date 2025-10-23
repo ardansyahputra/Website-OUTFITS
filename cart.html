@@ -18,8 +18,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
-html { scroll-behavior: smooth; }
 body { font-family: 'Poppins', sans-serif; background-color: #fdfaf6; color: #333; }
+html { scroll-behavior: smooth; }
 
 /* Navbar */
 .navbar { background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.3s ease; }
@@ -39,27 +39,36 @@ body { font-family: 'Poppins', sans-serif; background-color: #fdfaf6; color: #33
 
 /* Checkout Success Alert */
 #checkoutAlert {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  background-color: #28a745;
-  color: white;
-  padding: 25px 35px;
-  border-radius: 12px;
-  display: none;
-  z-index: 1000;
-  font-weight: 500;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-  opacity: 0;
-  transition: all 0.4s ease;
-  text-align: center;
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
+  background-color: #28a745; color: white; padding: 25px 35px; border-radius: 12px;
+  display: none; z-index: 1000; font-weight: 500; box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  opacity: 0; transition: all 0.4s ease; text-align: center;
 }
 #checkoutAlert.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 #checkoutAlert i { font-size: 2rem; margin-bottom: 10px; display: block; }
 
-/* Footer */
-footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 60px; color: #888; font-size: 0.9rem; }
+.btn-back {
+  background-color: #663d00; /* coklat */
+  color: #fff;
+  border-radius: 30px;
+  padding: 12px 35px;
+  border: 2px solid #663d00;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-back:hover,
+.btn-back:active {
+  background-color: #fff;
+  color: #663d00;
+  border: 2px solid #663d00;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) { .btn-checkout { width: 100%; } }
 </style>
 </head>
 <body>
@@ -75,14 +84,18 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
   </button>
   <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
     <ul class="navbar-nav align-items-center">
-      <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
-      <li class="nav-item"><a class="nav-link" href="index.html#shop">Shop</a></li>
-      <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
-      <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
-      <li class="nav-item me-3"><a class="nav-link active" href="cart.html"><i class="bi bi-cart3 fs-5"></i></a></li>
       <li class="nav-item">
         <a href="profile.html">
-          <img id="navbarProfile" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic" width="42" height="42">
+         <img id="navbarProfile" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic" width="42" height="42">
+              <script>
+                window.addEventListener("load", () => {
+                const savedPhoto = localStorage.getItem("navbarProfile");
+                if(savedPhoto){
+                const navImg = document.getElementById("navbarProfile");
+                if(navImg) navImg.src = savedPhoto;
+                  }
+                });
+              </script>
         </a>
       </li>
     </ul>
@@ -110,12 +123,42 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
     </table>
   </div>
 
-  <div class="d-flex justify-content-end mt-4">
-    <h4 class="me-4">Total: <span id="totalPrice">$0.00</span></h4>
-    <button class="btn btn-checkout" id="checkoutBtn">Proceed to Checkout</button>
+<div class="d-flex flex-column align-items-end mt-4">
+  <h4 class="me-4">Total: <span id="totalPrice">$0.00</span></h4>
+  <button class="btn btn-checkout mb-2" id="checkoutBtn">Proceed to Checkout</button>
+  <a href="product.html" class="btn btn-back">Back</a>
+</div>
+
+</section>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="paymentModalLabel">Choose Payment Method</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="d-grid gap-3">
+          <div class="d-grid gap-3">
+          <button class="btn btn-outline-primary btn-lg" onclick="completeCheckout('Credit Card')">
+            <i class="bi bi-credit-card me-2"></i> Credit Card
+          </button>
+          <button class="btn btn-outline-success btn-lg" onclick="completeCheckout('PayPal')">
+            <i class="bi bi-paypal me-2"></i> PayPal
+          </button>
+          <button class="btn btn-outline-warning btn-lg" onclick="completeCheckout('Cash')">
+            <i class="bi bi-cash-stack me-2"></i> Cash
+          </button>
+        </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-</section>
 
 <!-- Checkout Alert -->
 <div id="checkoutAlert"><i class="bi bi-check-circle-fill"></i> Checkout Successful!</div>
@@ -135,11 +178,9 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
     let cartBody = document.getElementById('cartBody');
     cartBody.innerHTML = '';
     let totalPrice = 0;
-
-    cart.forEach((item, index)=>{
-      let itemTotal = item.price * item.quantity;
+    cart.forEach((item,index)=>{
+      let itemTotal = item.price*item.quantity;
       totalPrice += itemTotal;
-
       cartBody.innerHTML += `
         <tr>
           <td><img src="${item.image}" alt="${item.name}"></td>
@@ -147,9 +188,9 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
           <td>$${item.price.toFixed(2)}</td>
           <td>
             <div class="d-flex align-items-center">
-              <button class="btn btn-sm btn-outline-secondary me-2" onclick="changeQty(${index}, -1)">-</button>
+              <button class="btn btn-sm btn-outline-secondary me-2" onclick="changeQty(${index},-1)">-</button>
               <input type="text" value="${item.quantity}" readonly class="form-control text-center" style="width:50px;">
-              <button class="btn btn-sm btn-outline-secondary ms-2" onclick="changeQty(${index}, 1)">+</button>
+              <button class="btn btn-sm btn-outline-secondary ms-2" onclick="changeQty(${index},1)">+</button>
             </div>
           </td>
           <td>$${itemTotal.toFixed(2)}</td>
@@ -157,14 +198,13 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
         </tr>
       `;
     });
-
     document.getElementById('totalPrice').innerText = `$${totalPrice.toFixed(2)}`;
   }
 
   function changeQty(index, delta){
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart[index].quantity += delta;
-    if(cart[index].quantity < 1) cart[index].quantity = 1;
+    if(cart[index].quantity<1) cart[index].quantity=1;
     localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
   }
@@ -184,21 +224,31 @@ footer { background-color: #fff; text-align: center; padding: 20px; margin-top: 
 
   checkoutBtn.addEventListener('click', ()=>{
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    if(cart.length > 0){
-      // Show success alert
-      alertBox.style.display = 'block';
-      setTimeout(()=> alertBox.classList.add('show'), 10);
-
-      setTimeout(()=>{
-        alertBox.classList.remove('show');
-        setTimeout(()=> alertBox.style.display = 'none', 400);
-      }, 3000);
-
-      // Reset cart
-      localStorage.removeItem('cart'); // cart jadi 0
-      renderCart();
+    if(cart.length>0){
+      let paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+      paymentModal.show();
     }
   });
+
+  function completeCheckout(method){
+    // Hide modal
+    let paymentModalEl = document.getElementById('paymentModal');
+    let modal = bootstrap.Modal.getInstance(paymentModalEl);
+    modal.hide();
+
+    // Clear cart
+    localStorage.removeItem('cart');
+    renderCart();
+
+    // Show success alert
+    alertBox.innerHTML = `<i class="bi bi-check-circle-fill"></i> Payment Successful via ${method}!`;
+    alertBox.style.display='block';
+    setTimeout(()=> alertBox.classList.add('show'),10);
+    setTimeout(()=>{
+      alertBox.classList.remove('show');
+      setTimeout(()=> alertBox.style.display='none',400);
+    },3000);
+  }
 </script>
 
 </body>
