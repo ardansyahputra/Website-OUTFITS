@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | OUTFITS</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo.jpeg" style="border-radius:50%;">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ===== VIDEO BACKGROUND ===== */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      filter: brightness(70%);
+    }
+
+    .floating-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at 30% 30%, #8bb9ff15, transparent 70%),
+                  radial-gradient(circle at 70% 70%, #ffecd215, transparent 70%);
+      animation: bgMove 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes bgMove {
+      0% { background-position: 30% 30%, 70% 70%; }
+      100% { background-position: 40% 60%, 60% 40%; }
+    }
+
+    /* ===== CARD UTAMA ===== */
+    .welcome-card {
+      background-color: rgba(102, 61, 0, 0.51);
+      border-radius: 20px;
+      padding: 60px 80px;
+      text-align: center;
+      color: #fff;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    .welcome-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      animation: floatLogo 3s ease-in-out infinite;
+    }
+
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 2.5rem;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease;
+    }
+
+    /* ===== TEKS PARAGRAF RAPI ===== */
+    p {
+      color: #f2f2f2;
+      font-size: 1.15rem;
+      margin-top: 20px;
+      margin-bottom: 35px;
+      line-height: 1.8;
+      letter-spacing: 0.5px;
+      text-align: center;
+      white-space: pre-line;
+      animation: textSlide 1.5s ease;
+    }
+
+    @keyframes textSlide {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-start {
+      background-color: #000000;
+      color: #ffffff;
+      border-radius: 30px;
+      padding: 12px 40px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: 0.4s ease;
+      text-decoration: none;
+      animation: fadeIn 2s ease;
+    }
+
+    .btn-start:hover {
+      background-color: #663d0082;
+      color: #fff;
+      transform: scale(1.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .welcome-card { padding: 40px 25px; }
+      h1 { font-size: 2rem; }
+      p { font-size: 1rem; }
+      .btn-start { padding: 10px 30px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="images/chanel.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+  <div class="floating-bg"></div>
+
+  <div class="welcome-container">
+    <div class="welcome-card">
+      <img src="images/logo.jpeg" alt="OUTFITS Logo" class="welcome-logo">
+      <h1>Welcome to <span style="color:#dc8400dc;">OUTFITS</span></h1>
+      <p>
+        Find some vintage and high-value items  
+        to make your fashion stand out.  
+        Click the button below to explore more.
+      </p>
+      <a href="index.html" class="btn-start">Explore Now</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('mousemove', (e) => {
+      const bg = document.querySelector('.floating-bg');
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      bg.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OUTFITS | Fashion Store</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo.jpeg" style="border-radius:50%;">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fdfaf6;
+      color: #333;
+      font-size: 1.05rem;
+    }
+
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background-color: #f8f9fa;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: #000;
+    }
+
+    .navbar-brand span {
+      color: #8bb9ff;
+    }
+
+    .nav-link {
+      font-weight: 500;
+      margin: 0 8px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #663d0082;
+    }
+
+    .hero {
+      background: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      color: #bababa;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      padding-left: 5%;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      animation: fadeDown 1.2s ease;
+    }
+
+    .hero p {
+      font-size: 2.1rem;
+      color: #bababa;
+      margin-bottom: 30px;
+      animation: fadeUp 1.5s ease;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn-fashion {
+      background-color: #000;
+      color: white;
+      border-radius: 30px;
+      padding: 12px 35px;
+      transition: 0.3s;
+    }
+
+    .btn-fashion:hover {
+      background-color: #663d0082;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 70px 0 40px;
+      font-weight: 600;
+      font-size: 2.2rem;
+      color: #000;
+    }
+
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      height: 380px;
+      object-fit: cover;
+    }
+
+    .profile-pic {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 60px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    
+    /* Section Styling */
+    #about, #contact, #shop {
+      padding: 80px 0;
+    }
+
+    #about {
+      background: #fafafa;
+    }
+
+    #contact {
+      background: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="welcome.html">
+        <img src="images/logo.jpeg" width="45" height="45" alt="logo" style="border-radius:50%;">
+        OUTFITS
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item me-3">
+            <a class="nav-link" href="cart.html"><i class="bi bi-cart3 fs-5"></i></a>
+          </li>
+          <li class="nav-item">
+            <a href="profile.html">
+              <img id="navbarProfile" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-pic" width="42" height="42">
+              <script>
+                // Load foto profil dari localStorage
+                window.addEventListener("load", () => {
+                    const savedPhoto = localStorage.getItem("navbarProfile");
+                    if(savedPhoto){
+                    const navImg = document.getElementById("navbarProfile");
+                    if(navImg) navImg.src = savedPhoto;
+                    }
+                });
+                </script>
+             </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <h1>OUTFITS Here</h1>
+      <p>Discover the latest collection of premium Brand, crafted for timeless style.</p>
+      <a href="#shop" class="btn btn-fashion">Discover Now</a>
+    </div>
+  </section>
+
+  <!-- Shop Section -->
+  <section id="shop" class="container">
+    <h2 class="section-title">Shop & Detail Fashion</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="images/denim.jpeg" class="card-img-top" alt="Product">
+          <div class="card-body text-center">
+            <h5 class="card-title">Classic Denim Jacket</h5>
+            <p class="text-muted">$89.99</p>
+            <a href="product.html#denim" class="btn btn-fashion btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="images/shirt.jpeg" class="card-img-top" alt="Product">
+          <div class="card-body text-center">
+            <h5 class="card-title">Cotton Casual Shirt</h5>
+            <p class="text-muted">$59.99</p>
+           <a href="product.html#shirt" class="btn btn-fashion btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="images/celana.jpeg" class="card-img-top" alt="Product">
+          <div class="card-body text-center">
+            <h5 class="card-title">Slim Fit Trousers</h5>
+            <p class="text-muted">$69.99</p>
+            <a href="product.html#trousers" class="btn btn-fashion btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <section id="about" class="about-section py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Teks di kiri -->
+      <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
+        <h1 class="fw-bold mb-3" style="color:#663d00;">About OUTFITS</h1>
+        <p style="line-height:1.8; font-size:1.1rem; color:#444;">
+          <strong>OUTFITS</strong> was founded with a vision to redefine modern fashion through simplicity, quality, 
+          and sustainability. Each piece we create tells a story of elegance and confidence — designed for those 
+          who appreciate timeless style with a modern touch. 
+          <br><br>
+          Our founder, <strong>Olivia Carter</strong>, started OUTFITS from a small creative studio in 2019. 
+          With her passion for art and design, she envisioned a world where fashion meets purpose. Today, 
+          OUTFITS continues to grow, delivering exclusive collections that blend comfort, sophistication, 
+          and individuality. 
+          <br><br>
+          Join our journey, and let your outfit speak your story.
+        </p>
+      </div>
+
+      <!-- Foto di kanan -->
+      <div class="col-lg-6 col-md-12 text-center">
+        <img src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=600&q=80"
+             alt="Founder"
+             class="img-fluid rounded shadow-lg"
+             style="border-radius: 20px; max-width: 90%;">
+        <p class="mt-3" style="font-style: italic; color:#555;">Olivia Carter — Founder & Creative Director</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+ <section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="row g-4">
+      
+      <!-- Kolom kiri -->
+      <div class="col-md-6">
+        <div class="contact-info p-4 rounded shadow-sm" style="background:#fff; border-left:5px solid #663d0082;">
+          <h4 class="fw-bold mb-3" style="color:#663d00;">Get in Touch</h4>
+          <p style="font-size:1.15rem; color:#333;">
+            <i class="bi bi-envelope" style="color:#663d00; font-size:1.3rem;"></i>
+            <strong> Email:</strong> outfitsfashion@gmail.com
+          </p>
+          <p style="font-size:1.15rem; color:#333;">
+            <i class="bi bi-telephone" style="color:#663d00; font-size:1.3rem;"></i>
+            <strong> Phone:</strong> +62 812 3456 7890
+          </p>
+          <p style="font-size:1.15rem; color:#333;">
+            <i class="bi bi-geo-alt" style="color:#663d00; font-size:1.3rem;"></i>
+            <strong> Address:</strong> Aeon Mall BSD, Jl. BSD Raya Utama Lt.3, Pagedangan, Kec. Pagedangan, Kabupaten Tangerang, Banten 15345
+          </p>
+          <hr style="border:1px solid #ddd;">
+          <p style="color:#555; font-style:italic;">
+            We’d love to hear from you! Feel free to reach out for collaborations, press, or general inquiries.
+          </p>
+        </div>
+      </div>
+
+      <!-- Kolom kanan: Google Maps -->
+      <div class="col-md-6">
+        <div class="map-container shadow-sm rounded" style="overflow:hidden; border:4px solid #663d0082;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2814581346414!2d106.6418069!3d-6.3037828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fb4cdb86c07b%3A0xcdf5c0a3abb8a5b1!2sCinema%20XXI!5e0!3m2!1sid!2sid!4v1730000000000!5m2!1sid!2sid"
+            width="100%"
+            height="340"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <footer>
+    © 2025 OUTFITS. All Rights Reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    });
+  </script>
+
+</body>
+</html>
