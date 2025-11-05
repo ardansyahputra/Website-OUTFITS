@@ -193,17 +193,21 @@ button:hover {
     }
   });
 
-  document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const pass = pwd.value;
-    if (email === 'admin@test' && pass === '12345678') {
-      alert('Login berhasil! (Demo)');
-      location.href = 'dashboard.html';
-    } else {
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const pass = pwd.value;
+
+  // Cek akun sederhana
+  if (email === 'admin@test' && pass === '12345678') {
+      localStorage.setItem('siam_auth', 'true'); // ✅ simpan status login
+      alert('Login berhasil!');
+      window.location.href = 'dashboard.html';
+  } else {
       alert('Email atau password salah.');
-    }
-  });
+  }
+});
+
 </script>
 </body>
 </html>
