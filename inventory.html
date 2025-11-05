@@ -87,9 +87,104 @@ body {
   opacity: 0.8;
 }
 
-@media (max-width: 900px) {
-  .sidebar { position: relative; width: 100%; height: auto; }
-  .main { margin-left: 0; }
+/* 🔹 RESPONSIVE DESIGN */
+@media (max-width: 992px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+  }
+
+  .sidebar nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .sidebar a {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 18px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .table th, .table td {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .table img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar nav {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sidebar .logo {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 1.2rem;
+  }
+
+  .card h5 {
+    font-size: 1rem;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  #preview {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 576px) {
+  .main {
+    padding: 14px;
+  }
+
+  .sidebar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidebar nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .row.g-3 > div {
+    flex: 1 1 100%;
+  }
+
+  button, .btn {
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -104,7 +199,7 @@ body {
   </aside>
 
   <main class="main">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
       <h4 class="fw-bold">Inventori Produk</h4>
     </div>
 
@@ -114,25 +209,25 @@ body {
       <form id="productForm">
         <input type="hidden" id="editId">
         <div class="row g-3">
-          <div class="col-md-4">
+          <div class="col-md-4 col-12">
             <label class="form-label">Nama Produk</label>
             <input type="text" id="name" class="form-control" required>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-12">
             <label class="form-label">Kategori</label>
             <input type="text" id="category" class="form-control" required>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-2 col-12">
             <label class="form-label">Harga</label>
             <input type="number" id="price" class="form-control" required>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-12">
             <label class="form-label">Gambar Produk</label>
             <input type="file" id="image" class="form-control" accept="image/*" required>
             <small class="text-muted">Pilih gambar produk (JPG/PNG)</small>
             <img id="preview" src="" alt="Preview" style="display:none;width:80px;height:80px;object-fit:cover;margin-top:8px;border-radius:8px;">
           </div>
-          <div class="col-md-12">
+          <div class="col-12">
             <label class="form-label">Deskripsi</label>
             <textarea id="desc" class="form-control" rows="2" required></textarea>
           </div>
@@ -144,20 +239,22 @@ body {
 
     <!-- Table Produk -->
     <div class="card p-3">
-      <table class="table table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>#</th>
-            <th>Gambar</th>
-            <th>Nama Produk</th>
-            <th>Kategori</th>
-            <th>Harga</th>
-            <th>Deskripsi</th>
-            <th style="width:110px;">Aksi</th>
-          </tr>
-        </thead>
-        <tbody id="productTableBody"></tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>#</th>
+              <th>Gambar</th>
+              <th>Nama Produk</th>
+              <th>Kategori</th>
+              <th>Harga</th>
+              <th>Deskripsi</th>
+              <th style="width:110px;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
     </div>
   </main>
 
