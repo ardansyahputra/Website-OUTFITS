@@ -11,20 +11,153 @@
   <script src="https://kit.fontawesome.com/1b9b7b9d6f.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
   <style>
-    :root{--sidebar:#0e1720;--accent:#0b66ff;--card:#fff}
-    body{min-height:100vh;font-family:Inter,system-ui;background:#f4f7fb}
-    .app{display:flex;min-height:100vh}
-    .sidebar{width:240px;background:var(--sidebar);color:#ccd6dd;padding:18px;position:fixed;height:100%;overflow:auto}
-    .sidebar .logo{font-weight:800;color:#d8c69a;font-size:20px;margin-bottom:18px}
-    .sidebar a{color:#bfcbd2;text-decoration:none;display:block;padding:10px;border-radius:8px}
-    .sidebar a.active, .sidebar a:hover{background:rgba(255,255,255,0.03);color:white}
-    .main{margin-left:260px;flex:1;padding:28px}
-    .topbar{display:flex;align-items:center;gap:12px;justify-content:flex-end}
-    .card-stat{background:white;border-radius:10px;padding:20px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
-    .chart-card{background:white;padding:18px;border-radius:10px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
-    @media (max-width:900px){ .sidebar{position:relative;width:100%;height:auto} .main{margin-left:0;padding:18px} }
+    :root {
+      --sidebar: #0e1720;
+      --accent: #0b66ff;
+      --card: #fff;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      background: #f4f7fb;
+      margin: 0;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: var(--sidebar);
+      color: #ccd6dd;
+      padding: 18px;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .sidebar .logo {
+      font-weight: 800;
+      color: #d8c69a;
+      font-size: 20px;
+      margin-bottom: 18px;
+    }
+
+    .sidebar a {
+      color: #bfcbd2;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .sidebar a.active,
+    .sidebar a:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: white;
+    }
+
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .card-stat {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+    }
+
+    .chart-card {
+      background: white;
+      padding: 18px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.06);
+    }
+
+    /* 🔹 Responsif untuk tablet & HP */
+    @media (max-width: 992px) {
+      .app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 18px;
+      }
+
+      .sidebar nav {
+        display: flex;
+        gap: 10px;
+      }
+
+      .sidebar a {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 18px;
+      }
+
+      .row.g-3 > div {
+        flex: 1 1 100%;
+      }
+
+      #prodPreview {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+      }
+
+      #prodPreview div {
+        width: 100% !important;
+      }
+    }
+
+    /* 🔹 Layar sangat kecil (HP <600px) */
+    @media (max-width: 600px) {
+      .sidebar nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .main {
+        padding: 14px;
+      }
+
+      h4 {
+        font-size: 1.1rem;
+      }
+
+      .sidebar .logo {
+        font-size: 18px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -40,7 +173,7 @@
     </aside>
 
     <main class="main">
-      <div class="d-flex align-items-center justify-content-between mb-3">
+      <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap">
         <div>
           <h4 style="margin:0">Dashboard</h4>
         </div>
@@ -53,9 +186,41 @@
 
       <!-- stats -->
       <div class="row g-3 mb-4">
-        <div class="col-md-4"><div class="card-stat"><div class="d-flex align-items-center justify-content-between"><div><h5 id="totalSales">Rp 0</h5><small class="text-muted">Total Sales</small></div><i class="fa fa-dollar-sign fa-2x text-muted"></i></div></div></div>
-        <div class="col-md-4"><div class="card-stat"><div class="d-flex align-items-center justify-content-between"><div><h5 id="totalReservations">0</h5><small class="text-muted">Total Reservations</small></div><i class="fa fa-calendar-check fa-2x text-muted"></i></div></div></div>
-        <div class="col-md-4"><div class="card-stat"><div class="d-flex align-items-center justify-content-between"><div><h5 id="totalCustomers">0</h5><small class="text-muted">Total Customers</small></div><i class="fa fa-users fa-2x text-muted"></i></div></div></div>
+        <div class="col-md-4 col-12">
+          <div class="card-stat">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h5 id="totalSales">Rp 0</h5>
+                <small class="text-muted">Total Sales</small>
+              </div>
+              <i class="fa fa-dollar-sign fa-2x text-muted"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card-stat">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h5 id="totalReservations">0</h5>
+                <small class="text-muted">Total Reservations</small>
+              </div>
+              <i class="fa fa-calendar-check fa-2x text-muted"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-12">
+          <div class="card-stat">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h5 id="totalCustomers">0</h5>
+                <small class="text-muted">Total Customers</small>
+              </div>
+              <i class="fa fa-users fa-2x text-muted"></i>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- chart -->
@@ -66,9 +231,9 @@
 
       <!-- product preview -->
       <div class="card-stat">
-        <div class="d-flex align-items-center justify-content-between mb-2">
+        <div class="d-flex align-items-center justify-content-between mb-2 flex-wrap">
           <h6 style="margin:0">Product Preview</h6>
-          <a href="#" id="openInventory" class="btn btn-sm btn-outline-primary">Open Inventori</a>
+          <a href="#" id="openInventory" class="btn btn-sm btn-outline-primary mt-2 mt-md-0">Open Inventori</a>
         </div>
 
         <div id="prodPreview" style="display:flex;gap:12px;flex-wrap:wrap"></div>
@@ -82,7 +247,7 @@
     location.href = 'admin.html';
   }
 
-  // inventory link handler (💡 ini bagian penting yang baru)
+  // inventory link handler
   document.getElementById('goInventory').addEventListener('click', function(e){
     e.preventDefault();
     location.href = 'inventory.html';
